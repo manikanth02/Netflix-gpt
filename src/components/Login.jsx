@@ -6,22 +6,14 @@ import {  createUserWithEmailAndPassword , signInWithEmailAndPassword } from "fi
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addUsers
- } from "../utils/userSlice";
- import {  updateProfile } from "firebase/auth";
+import { addUsers } from "../utils/userSlice";
+import { updateProfile } from "firebase/auth";
 const Login = () => {
 
    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [errorMessage,setErrorMessage] = useState(null);
     const [isSignUp,setIsSignUp] = useState(true);
-    // const [formState,setFormState] = useState({
-    //     email:"",
-    //     password:"",
-    //     name:"",
-    // })
-    
-    //creating References for input fields
     const name = useRef(null);
     const email = useRef(null);
     const password = useRef(null);
@@ -40,7 +32,6 @@ const Login = () => {
                     .then(() =>{
                         const {uid,email,displayName} = auth.currentUser;
                         dispatch(addUsers({uid:uid,displayName:displayName,email:email}));
-                        console.log({userCredentials:userCredentials});
                         navigate("/browse")
                     })
                     .catch((error) => {
@@ -51,15 +42,10 @@ const Login = () => {
                 .catch((error) => {
                     setErrorMessage(error.code + "-" + error.message);
                 })
-                
-
-
-
             }else{
                 //Sign In Case
                 signInWithEmailAndPassword (auth,email.current.value,password.current.value)
                 .then((userCredentials) => {
-                    console.log({userCredentials:userCredentials});
                     navigate("/browse");
                 })
                 .catch((error) => {

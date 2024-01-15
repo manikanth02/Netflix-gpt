@@ -9,10 +9,11 @@ import { toggleGptSearchView } from "../utils/gptSlice";
 import { SUPPORTED_LANGUAGES } from "../utils/constants";
 import { changeLanguage } from "../utils/configSlice";
 const Header = () => {
+
+  
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = useSelector((store) => store.user);
-
     const showGptSearch = useSelector((store) => store.gpt.showGptSearch)
     const handleSignOut = () => {
         signOut(auth).then(() => {
@@ -72,11 +73,6 @@ const Header = () => {
           >
             {showGptSearch ? "Homepage" : "GPT Search"}
           </button>
-          {/* <img
-            className="hidden md:block w-12 h-12"
-            alt="usericon"
-            src={user?.photoURL}
-          /> */}
           <div>
           <button
           className="py-2 px-4 mx-4 my-2 bg-purple-800 text-white rounded-lg"

@@ -78,11 +78,11 @@ const Header = () => {
           >
            { user?.displayName || "Manikanth"}
           </button>
-          <img
+          {/* <img
             className="hidden md:block w-12 h-12"
             alt="usericon"
             src={user?.photoURL}
-          />
+          /> */}
           <button onClick={handleSignOut} className="p-2 m-2 bg-gray-900 text-white rounded-lg">
             Sign Out
           </button>

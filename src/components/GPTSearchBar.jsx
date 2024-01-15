@@ -19,10 +19,10 @@ const GPTSearchBar = () => {
     }
 
      // search movie in TMDB
-  const searchMovieTMDB = async (movie) => {
+  const searchMovieTMDB = async (movieId) => {
     const data = await fetch(
       "https://api.themoviedb.org/3/search/movie?query=" +
-        movie +
+      movieId +
         "&include_adult=false&language=en-US&page=1",
       API_OPTIONS
     );
@@ -32,18 +32,16 @@ const GPTSearchBar = () => {
   };
 
 
-      const handleGptSearchClick = async () => {
+  const handleGptSearchClick = async () => {
       const id = searchText.current.value;
       console.log({id:id});
       const response  =await API_CALL({id});
 	    const result = response?.results;
-	    console.log({API_RESULTS:result});
       const newResult = result?.map((item) =>item?.original_title);
       const promiseArray = result.map((movie) => searchMovieTMDB(movie?.original_title));
 
       const finalData = await Promise.all(promiseArray);
 
-      console.log({finalData:finalData});
       dispatch(addGptMovies({movieNames:newResult  , movieResults:finalData}));
     }
 
